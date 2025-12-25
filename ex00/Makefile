@@ -1,5 +1,5 @@
 # * Program name
-NAME = a.out
+NAME = and_open
 
 # * Compilation
 CC = c++
