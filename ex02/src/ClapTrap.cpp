@@ -1,26 +1,23 @@
-#include "ScavTrap.hpp"
+#include "ClapTrap.hpp"
 #include <iostream>
 
-const int HIT_POINTS	= 100;
-const int ENERGY_POINTS	= 50;
-const int ATTACK_DAMAGE	= 20;
+const int HIT_POINTS	= 10;
+const int ENERGY_POINTS	= 10;
+const int ATTACK_DAMAGE	= 0;
 const std::string DFLT_MSG = "I cannot do anything!!!\n";
 
-ScavTrap::ScavTrap(void) : ClapTrap("")
+ClapTrap::ClapTrap(void) : name(""), hitPoints(HIT_POINTS), energyPoints(ENERGY_POINTS), attackDamage(ATTACK_DAMAGE)
 {
-	hitPoints = HIT_POINTS;
-	energyPoints = ENERGY_POINTS;
-	attackDamage = ATTACK_DAMAGE;
 	std::cout << GREEN "Default constructor called\n" << *this << RESET;
 }
 
-ScavTrap::ScavTrap(ScavTrap &copy) : ClapTrap(copy)
+ClapTrap::ClapTrap(ClapTrap &copy)
 {
 	*this = copy;
 	std::cout << YELLOW "Copy constructor called\n" << *this << RESET;
 }
 
-ClapTrap	&ScavTrap::operator=(const ScavTrap& copy)
+ClapTrap	&ClapTrap::operator=(const ClapTrap& copy)
 {
 	this->name = copy.name;
 	this->hitPoints = copy.hitPoints;
@@ -30,20 +27,17 @@ ClapTrap	&ScavTrap::operator=(const ScavTrap& copy)
 	return *this;
 }
 
-ScavTrap::~ScavTrap(void)
+ClapTrap::~ClapTrap(void)
 {
 	std::cout << RED "Desstructor called\n" << *this << RESET;
 }
 
-ScavTrap::ScavTrap(const std::string name) : ClapTrap(name)
+ClapTrap::ClapTrap(const std::string name) : name(name), hitPoints(HIT_POINTS), energyPoints(ENERGY_POINTS), attackDamage(ATTACK_DAMAGE)
 {
-	hitPoints = HIT_POINTS;
-	energyPoints = ENERGY_POINTS;
-	attackDamage = ATTACK_DAMAGE;
 	std::cout << GREEN "Name constructor called\n" << *this << RESET;
 }
 
-void	ScavTrap::attack(const std::string& target)
+void	ClapTrap::attack(const std::string& target)
 {
 	if (energyPoints == 0)
 	{
@@ -52,13 +46,13 @@ void	ScavTrap::attack(const std::string& target)
 	}
 	--energyPoints;
 	std::cout	<< YELLOW << *this 
-				<< "ScavTrap '" << name
+				<< "ClapTrap '" << name
 				<< "' attacks " << target 
 				<< ", causing " << attackDamage 
 				<< " points of damage!\n" RESET;
 }
 
-void	ScavTrap::takeDamage(unsigned int amount)
+void	ClapTrap::takeDamage(unsigned int amount)
 {
 	if (hitPoints == 0 || energyPoints == 0)
 	{
@@ -68,12 +62,12 @@ void	ScavTrap::takeDamage(unsigned int amount)
 	hitPoints -= amount;
 	if (hitPoints < 0)
 		hitPoints = 0;
-	std::cout 	<< MAGENTA "ScavTrap '" << name
+	std::cout 	<< MAGENTA "ClapTrap '" << name
 				<< "' is receiving " << amount
 				<< " points of damage!\n" RESET;
 }
 
-void	ScavTrap::beRepaired(unsigned int amount)
+void	ClapTrap::beRepaired(unsigned int amount)
 {
 	if (hitPoints == 0 || energyPoints == 0)
 	{
@@ -82,23 +76,33 @@ void	ScavTrap::beRepaired(unsigned int amount)
 	}
 	--energyPoints;
 	hitPoints += amount;
-	std::cout 	<< CYAN "ScavTrap '" << name
+	std::cout 	<< CYAN "ClapTrap '" << name
 				<< "' is recovering " << amount
 				<< " hit points!\n" RESET;
 }
 
-void	ScavTrap::guardGate()
+std::string ClapTrap::getName() const
 {
-	if (hitPoints == 0 || energyPoints == 0)
-	{
-		std::cout << RED << DFLT_MSG << *this << RESET;
-		return ;
-	}
-	std::cout << BLUE "I am now in Gate keeper mode\n" << *this << RESET;
+	return name;
 }
 
-std::ostream & operator<<(std::ostream & o, ScavTrap const & i)
+int	ClapTrap::getHitPoints() const
 {
-	o << "ScavTrap '" << i.getName() << "' [HP: " << i.getHitPoints() << ", EP: " << i.getEnergyPoints() << ", AD: " << i.getAttackDamage() << "]\n";
+	return hitPoints;
+}
+
+int	ClapTrap::getEnergyPoints() const
+{
+	return energyPoints;
+}
+
+int	ClapTrap::getAttackDamage() const
+{
+	return attackDamage;
+}
+
+std::ostream & operator<<(std::ostream & o, ClapTrap const & i)
+{
+	o << "ClapTrap '" << i.getName() << "' [HP: " << i.getHitPoints() << ", EP: " << i.getEnergyPoints() << ", AD: " << i.getAttackDamage() << "]\n";
 	return o;
 }

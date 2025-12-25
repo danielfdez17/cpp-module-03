@@ -1,4 +1,4 @@
-#include "ScavTrap.hpp"
+#include "FragTrap.hpp"
 #include <iostream>
 
 const int HIT_POINTS	= 100;
@@ -6,7 +6,7 @@ const int ENERGY_POINTS	= 50;
 const int ATTACK_DAMAGE	= 20;
 const std::string DFLT_MSG = "I cannot do anything!!!\n";
 
-ScavTrap::ScavTrap(void) : ClapTrap("")
+FragTrap::FragTrap(void) : ClapTrap("")
 {
 	hitPoints = HIT_POINTS;
 	energyPoints = ENERGY_POINTS;
@@ -14,13 +14,13 @@ ScavTrap::ScavTrap(void) : ClapTrap("")
 	std::cout << GREEN "Default constructor called\n" << *this << RESET;
 }
 
-ScavTrap::ScavTrap(ScavTrap &copy) : ClapTrap(copy)
+FragTrap::FragTrap(FragTrap &copy) : ClapTrap(copy)
 {
 	*this = copy;
 	std::cout << YELLOW "Copy constructor called\n" << *this << RESET;
 }
 
-ClapTrap	&ScavTrap::operator=(const ScavTrap& copy)
+ClapTrap	&FragTrap::operator=(const FragTrap& copy)
 {
 	this->name = copy.name;
 	this->hitPoints = copy.hitPoints;
@@ -30,12 +30,12 @@ ClapTrap	&ScavTrap::operator=(const ScavTrap& copy)
 	return *this;
 }
 
-ScavTrap::~ScavTrap(void)
+FragTrap::~FragTrap(void)
 {
 	std::cout << RED "Desstructor called\n" << *this << RESET;
 }
 
-ScavTrap::ScavTrap(const std::string name) : ClapTrap(name)
+FragTrap::FragTrap(const std::string name) : ClapTrap(name)
 {
 	hitPoints = HIT_POINTS;
 	energyPoints = ENERGY_POINTS;
@@ -43,7 +43,7 @@ ScavTrap::ScavTrap(const std::string name) : ClapTrap(name)
 	std::cout << GREEN "Name constructor called\n" << *this << RESET;
 }
 
-void	ScavTrap::attack(const std::string& target)
+void	FragTrap::attack(const std::string& target)
 {
 	if (energyPoints == 0)
 	{
@@ -52,13 +52,13 @@ void	ScavTrap::attack(const std::string& target)
 	}
 	--energyPoints;
 	std::cout	<< YELLOW << *this 
-				<< "ScavTrap '" << name
+				<< "FragTrap '" << name
 				<< "' attacks " << target 
 				<< ", causing " << attackDamage 
 				<< " points of damage!\n" RESET;
 }
 
-void	ScavTrap::takeDamage(unsigned int amount)
+void	FragTrap::takeDamage(unsigned int amount)
 {
 	if (hitPoints == 0 || energyPoints == 0)
 	{
@@ -68,12 +68,12 @@ void	ScavTrap::takeDamage(unsigned int amount)
 	hitPoints -= amount;
 	if (hitPoints < 0)
 		hitPoints = 0;
-	std::cout 	<< MAGENTA "ScavTrap '" << name
+	std::cout 	<< MAGENTA "FragTrap '" << name
 				<< "' is receiving " << amount
 				<< " points of damage!\n" RESET;
 }
 
-void	ScavTrap::beRepaired(unsigned int amount)
+void	FragTrap::beRepaired(unsigned int amount)
 {
 	if (hitPoints == 0 || energyPoints == 0)
 	{
@@ -82,23 +82,23 @@ void	ScavTrap::beRepaired(unsigned int amount)
 	}
 	--energyPoints;
 	hitPoints += amount;
-	std::cout 	<< CYAN "ScavTrap '" << name
+	std::cout 	<< CYAN "FragTrap '" << name
 				<< "' is recovering " << amount
 				<< " hit points!\n" RESET;
 }
 
-void	ScavTrap::guardGate()
+void	FragTrap::highFivesGuys()
 {
 	if (hitPoints == 0 || energyPoints == 0)
 	{
 		std::cout << RED << DFLT_MSG << *this << RESET;
 		return ;
 	}
-	std::cout << BLUE "I am now in Gate keeper mode\n" << *this << RESET;
+	std::cout << BLUE "High Five Guys!!!\n" << *this << RESET;
 }
 
-std::ostream & operator<<(std::ostream & o, ScavTrap const & i)
+std::ostream & operator<<(std::ostream & o, FragTrap const & i)
 {
-	o << "ScavTrap '" << i.getName() << "' [HP: " << i.getHitPoints() << ", EP: " << i.getEnergyPoints() << ", AD: " << i.getAttackDamage() << "]\n";
+	o << "FragTrap '" << i.getName() << "' [HP: " << i.getHitPoints() << ", EP: " << i.getEnergyPoints() << ", AD: " << i.getAttackDamage() << "]\n";
 	return o;
 }
