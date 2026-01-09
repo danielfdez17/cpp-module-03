@@ -6,16 +6,16 @@ const int ENERGY_POINTS	= 50;
 const int ATTACK_DAMAGE	= 30;
 const std::string DFLT_MSG = "I cannot do anything!!!\n";
 
-DiamondTrap::DiamondTrap(void) : FragTrap(__func__), ScavTrap(__func__)
+DiamondTrap::DiamondTrap(void) : ClapTrap("default_clap_name"), FragTrap(), ScavTrap()
 {
 	name += "_clap_name";
-	FragTrap::hitPoints = HIT_POINTS;
-	ScavTrap::energyPoints = ENERGY_POINTS;
-	FragTrap::attackDamage = ATTACK_DAMAGE;
+	hitPoints = HIT_POINTS;
+	energyPoints = ENERGY_POINTS;
+	attackDamage = ATTACK_DAMAGE;
 	std::cout << GREEN "Default constructor called\n" << *this << RESET;
 }
 
-DiamondTrap::DiamondTrap(DiamondTrap &copy) : FragTrap(copy), ScavTrap(copy)
+DiamondTrap::DiamondTrap(DiamondTrap &copy) : ClapTrap(copy), FragTrap(copy), ScavTrap(copy)
 {
 	*this = copy;
 	std::cout << YELLOW "Copy constructor called\n" << *this << RESET;
@@ -24,51 +24,53 @@ DiamondTrap::DiamondTrap(DiamondTrap &copy) : FragTrap(copy), ScavTrap(copy)
 DiamondTrap	&DiamondTrap::operator=(const DiamondTrap& copy)
 {
 	this->name = copy.name;
-	FragTrap::hitPoints = copy.FragTrap::hitPoints;
-	ScavTrap::energyPoints = copy.ScavTrap::energyPoints;
-	FragTrap::attackDamage = copy.FragTrap::attackDamage;
+	this->hitPoints = copy.hitPoints;
+	this->energyPoints = copy.energyPoints;
+	this->attackDamage = copy.attackDamage;
+	ClapTrap::name = copy.ClapTrap::name;
 	std::cout << CYAN "Copy assignment operator called\n" << *this << RESET;
 	return *this;
 }
 
 DiamondTrap::~DiamondTrap(void)
 {
-	std::cout << RED "Desstructor called\n" << *this << RESET;
+	std::cout << RED "Destructor called\n" << *this << RESET;
 }
 
-DiamondTrap::DiamondTrap(const std::string name) : FragTrap(name), ScavTrap(name)
+DiamondTrap::DiamondTrap(const std::string name) : ClapTrap(name + "_clap_name"), FragTrap(name), ScavTrap(name)
 {
-	FragTrap::hitPoints = HIT_POINTS;
-	ScavTrap::energyPoints = ENERGY_POINTS;
-	FragTrap::attackDamage = ATTACK_DAMAGE;
+	this->name = name;
+	hitPoints = HIT_POINTS;
+	energyPoints = ENERGY_POINTS;
+	attackDamage = ATTACK_DAMAGE;
 	std::cout << GREEN "Name constructor called\n" << *this << RESET;
 }
 
 void	DiamondTrap::attack(const std::string& target)
 {
-	if (ScavTrap::energyPoints == 0)
+	if (energyPoints == 0)
 	{
 		std::cout << RED << DFLT_MSG << *this << RESET;
 		return ;
 	}
-	--ScavTrap::energyPoints;
+	--energyPoints;
 	std::cout	<< YELLOW << *this 
 				<< "DiamondTrap '" << name
 				<< "' attacks " << target 
-				<< ", causing " << FragTrap::attackDamage 
+				<< ", causing " << attackDamage 
 				<< " points of damage!\n" RESET;
 }
 
 void	DiamondTrap::takeDamage(unsigned int amount)
 {
-	if (FragTrap::hitPoints == 0 || ScavTrap::energyPoints == 0)
+	if (hitPoints == 0 || energyPoints == 0)
 	{
 		std::cout << RED << DFLT_MSG << *this << RESET;
 		return ;
 	}
-	FragTrap::hitPoints -= amount;
-	if (FragTrap::hitPoints < 0)
-		FragTrap::hitPoints = 0;
+	hitPoints -= amount;
+	if (hitPoints < 0)
+		hitPoints = 0;
 	std::cout 	<< MAGENTA "DiamondTrap '" << name
 				<< "' is receiving " << amount
 				<< " points of damage!\n" RESET;
@@ -76,13 +78,13 @@ void	DiamondTrap::takeDamage(unsigned int amount)
 
 void	DiamondTrap::beRepaired(unsigned int amount)
 {
-	if (FragTrap::hitPoints == 0 || ScavTrap::energyPoints == 0)
+	if (hitPoints == 0 || energyPoints == 0)
 	{
 		std::cout << RED << DFLT_MSG << *this << RESET;
 		return ;
 	}
-	--ScavTrap::energyPoints;
-	FragTrap::hitPoints += amount;
+	--energyPoints;
+	hitPoints += amount;
 	std::cout 	<< CYAN "DiamondTrap '" << name
 				<< "' is recovering " << amount
 				<< " hit points!\n" RESET;
@@ -90,7 +92,7 @@ void	DiamondTrap::beRepaired(unsigned int amount)
 
 void	DiamondTrap::guardGate()
 {
-	if (FragTrap::hitPoints == 0 || ScavTrap::energyPoints == 0)
+	if (hitPoints == 0 || energyPoints == 0)
 	{
 		std::cout << RED << DFLT_MSG << *this << RESET;
 		return ;
