@@ -16,32 +16,31 @@
 class ClapTrap
 {
 protected:
-
-	std::string	name;
-	int			hitPoints;
-	int			energyPoints;
-	int			attackDamage;
+	std::string name;
+	int hitPoints;
+	int energyPoints;
+	int attackDamage;
 
 public:
 	// ? Orthodox Canonical Form
 	ClapTrap(void);
 	ClapTrap(ClapTrap &copy);
-	ClapTrap & operator=(const ClapTrap& copy);
+	ClapTrap &operator=(const ClapTrap &copy);
 	~ClapTrap(void);
 	// ? Orthodox Canonical Form
 
 	ClapTrap(const std::string name);
 
-	virtual void	attack(const std::string& target);
-	void	takeDamage(unsigned int amount);
-	void	beRepaired(unsigned int amount);
+	virtual void attack(const std::string &target);
+	void takeDamage(unsigned int amount);
+	void beRepaired(unsigned int amount);
 
 	std::string getName() const;
-	int			getHitPoints() const;
-	int			getEnergyPoints() const;
-	int			getAttackDamage() const;
+	int getHitPoints() const;
+	int getEnergyPoints() const;
+	int getAttackDamage() const;
 };
 
-std::ostream & operator<<(std::ostream & o, ClapTrap const & i);
+std::ostream &operator<<(std::ostream &o, ClapTrap const &i);
 
 #endif // __CLAPTRAP__
