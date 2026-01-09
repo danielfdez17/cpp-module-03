@@ -2,8 +2,8 @@
 #include <iostream>
 
 const int HIT_POINTS	= 100;
-const int ENERGY_POINTS	= 50;
-const int ATTACK_DAMAGE	= 20;
+const int ENERGY_POINTS	= 100;
+const int ATTACK_DAMAGE	= 30;
 const std::string DFLT_MSG = "I cannot do anything!!!\n";
 
 FragTrap::FragTrap(void) : ClapTrap("")
