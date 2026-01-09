@@ -22,7 +22,7 @@ public:
 	// ? Orthodox Canonical Form
 	DiamondTrap(void);
 	DiamondTrap(DiamondTrap &copy);
-	ClapTrap & operator=(const DiamondTrap& copy);
+	DiamondTrap& operator=(const DiamondTrap& copy);
 	~DiamondTrap(void);
 	// ? Orthodox Canonical Form
 
