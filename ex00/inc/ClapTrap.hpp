@@ -36,7 +36,7 @@ public:
 	void	takeDamage(unsigned int amount);
 	void	beRepaired(unsigned int amount);
 
-	std::string getName() const;
+	std::string	getName() const;
 	int			getHitPoints() const;
 	int			getEnergyPoints() const;
 	int			getAttackDamage() const;

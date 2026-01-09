@@ -4,9 +4,9 @@
 const int HIT_POINTS	= 10;
 const int ENERGY_POINTS	= 10;
 const int ATTACK_DAMAGE	= 0;
-const std::string DFLT_MSG = "I cannot do anything!!!\n";
+const std::string DFLT_MSG = "I can do nothing!!!\n";
 
-ClapTrap::ClapTrap(void) : name(""), hitPoints(HIT_POINTS), energyPoints(ENERGY_POINTS), attackDamage(ATTACK_DAMAGE)
+ClapTrap::ClapTrap(void) : name(__func__), hitPoints(HIT_POINTS), energyPoints(ENERGY_POINTS), attackDamage(ATTACK_DAMAGE)
 {
 	std::cout << GREEN "Default constructor called\n" << *this << RESET;
 }
@@ -19,10 +19,13 @@ ClapTrap::ClapTrap(ClapTrap &copy)
 
 ClapTrap	&ClapTrap::operator=(const ClapTrap& copy)
 {
-	this->name = copy.name;
-	this->hitPoints = copy.hitPoints;
-	this->energyPoints = copy.energyPoints;
-	this->attackDamage = copy.attackDamage;
+	if (this != &copy)
+	{
+		this->name = copy.name;
+		this->hitPoints = copy.hitPoints;
+		this->energyPoints = copy.energyPoints;
+		this->attackDamage = copy.attackDamage;
+	}
 	std::cout << CYAN "Copy assignment operator called\n" << *this << RESET;
 	return *this;
 }
