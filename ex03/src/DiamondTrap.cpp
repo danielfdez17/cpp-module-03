@@ -90,14 +90,10 @@ void	DiamondTrap::beRepaired(unsigned int amount)
 				<< " hit points!\n" RESET;
 }
 
-void	DiamondTrap::guardGate()
+void	DiamondTrap::whoAmI()
 {
-	if (hitPoints == 0 || energyPoints == 0)
-	{
-		std::cout << RED << DFLT_MSG << *this << RESET;
-		return ;
-	}
-	std::cout << BLUE "I am now in Gate keeper mode\n" << *this << RESET;
+	std::cout << BLUE "I am DiamondTrap '" << name << "'\n" RESET;
+	std::cout << BLUE "My ClapTrap name is '" << ClapTrap::name << "'\n" RESET;
 }
 
 std::ostream & operator<<(std::ostream & o, DiamondTrap const & i)
