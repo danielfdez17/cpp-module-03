@@ -19,19 +19,15 @@ public:
 	// ? Orthodox Canonical Form
 	ScavTrap(void);
 	ScavTrap(ScavTrap &copy);
-	ClapTrap & operator=(const ScavTrap& copy);
+	ClapTrap &operator=(const ScavTrap &copy);
 	~ScavTrap(void);
 	// ? Orthodox Canonical Form
 
 	ScavTrap(const std::string name);
 
-	void	attack(const std::string& target);
-	void	takeDamage(unsigned int amount);
-	void	beRepaired(unsigned int amount);
-
-	void	guardGate();
+	void guardGate();
 };
 
-std::ostream & operator<<(std::ostream & o, ScavTrap const & i);
+std::ostream &operator<<(std::ostream &o, ScavTrap const &i);
 
 #endif // __SCAVTRAP__

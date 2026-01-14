@@ -4,10 +4,10 @@
 int main(void)
 {
 	DiamondTrap patata("patata");
-	std::cout << "attack damage: " << patata.getAttackDamage() << "\n";
 	std::cout << "hit points: " << patata.getHitPoints() << "\n";
 	std::cout << "energy points: " << patata.getEnergyPoints() << "\n";
-	// patata.attack("Square Pants Sponge Bob");
+	std::cout << "attack damage: " << patata.getAttackDamage() << "\n";
+	patata.attack("Square Pants Sponge Bob");
 	// patata.attack("Square Pants Sponge Bob");
 	// patata.attack("Square Pants Sponge Bob");
 	// patata.attack("Square Pants Sponge Bob");

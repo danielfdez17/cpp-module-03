@@ -3,7 +3,7 @@ NAME = now_its_weird
 
 # * Compilation
 CC = c++
-CFLAGS = -Wall -Wextra -Werror -std=c++98 -g
+CFLAGS = -Wall -Wextra -Werror -std=c++98 -g3
 CFLAGS += -fsanitize=address -Wshadow -Wno-shadow
 
 # * Removal
@@ -54,10 +54,9 @@ fclean: clean
 re: fclean all
 	@echo "Rebuilding $(NAME)"
 
-run: all
-	clear
+run: re
 	./$(NAME)
 
-.PHONY: all obj clean fclean re
+.PHONY: all obj clean fclean re run
 
 .DEFAULT_GOAL: all
