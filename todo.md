@@ -1,0 +1,1 @@
+ - fix DiamondTrap inherited attributes and methods
