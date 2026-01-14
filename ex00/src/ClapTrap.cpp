@@ -37,7 +37,7 @@ ClapTrap::~ClapTrap(void)
 
 ClapTrap::ClapTrap(const std::string name) : name(name), hitPoints(HIT_POINTS), energyPoints(ENERGY_POINTS), attackDamage(ATTACK_DAMAGE)
 {
-	std::cout << GREEN "Name constructor called\n" << *this << RESET;
+	std::cout << GREEN "Parametric constructor called\n" << *this << RESET;
 }
 
 void	ClapTrap::attack(const std::string& target)
@@ -50,8 +50,8 @@ void	ClapTrap::attack(const std::string& target)
 	--energyPoints;
 	std::cout	<< YELLOW << *this 
 				<< "ClapTrap '" << name
-				<< "' attacks " << target 
-				<< ", causing " << attackDamage 
+				<< "' attacks '" << target 
+				<< "', causing " << attackDamage 
 				<< " points of damage!\n" RESET;
 }
 
