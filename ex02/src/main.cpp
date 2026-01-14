@@ -1,8 +1,12 @@
 #include "FragTrap.hpp"
+#include "ScavTrap.hpp"
+#include <iostream>
 
 int main(void)
 {
 	FragTrap patata("patata");
+	ClapTrap copia = patata;
+	std::cout << copia;;
 	patata.attack("Square Pants Sponge Bob");
 	patata.attack("Square Pants Sponge Bob");
 	patata.attack("Square Pants Sponge Bob");

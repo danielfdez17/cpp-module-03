@@ -53,10 +53,10 @@ fclean: clean
 re: fclean all
 	@echo "Rebuilding $(NAME)"
 
-run: all
+run: re
 	clear
 	./$(NAME)
 
-.PHONY: all obj clean fclean re
+.PHONY: all obj clean fclean re run
 
 .DEFAULT_GOAL: all
