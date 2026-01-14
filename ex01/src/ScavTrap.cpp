@@ -47,7 +47,7 @@ ScavTrap::ScavTrap(const std::string name) : ClapTrap(name)
 	hitPoints = HIT_POINTS;
 	energyPoints = ENERGY_POINTS;
 	attackDamage = ATTACK_DAMAGE;
-	std::cout << GREEN "Name constructor called\n"
+	std::cout << GREEN "Parametric constructor called\n"
 			  << *this << RESET;
 }
 
@@ -61,8 +61,8 @@ void ScavTrap::attack(const std::string &target)
 	--energyPoints;
 	std::cout << YELLOW << *this
 			  << "ScavTrap '" << name
-			  << "' attacks " << target
-			  << ", causing " << attackDamage
+			  << "' attacks '" << target
+			  << "', causing " << attackDamage
 			  << " points of damage!\n" RESET;
 }
 
