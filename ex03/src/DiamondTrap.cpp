@@ -52,9 +52,9 @@ DiamondTrap::~DiamondTrap(void)
 DiamondTrap::DiamondTrap(const std::string name) : ClapTrap(name + "_clap_name"), FragTrap(name), ScavTrap(name)
 {
 	this->name = name;
-	hitPoints = D_HIT_POINTS;
-	energyPoints = D_ENERGY_POINTS;
-	attackDamage = D_ATTACK_DAMAGE;
+	this->hitPoints = FragTrap::hitPoints;
+	this->energyPoints = ScavTrap::energyPoints;
+	this->attackDamage = FragTrap::attackDamage;
 	std::cout << GREEN << *this << __func__ << " Name constructor called\n" RESET;
 }
 
