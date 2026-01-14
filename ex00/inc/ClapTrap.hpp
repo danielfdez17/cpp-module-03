@@ -18,6 +18,7 @@ class ClapTrap
 private:
 
 	std::string	name;
+	std::string	type;
 	int			hitPoints;
 	int			energyPoints;
 	int			attackDamage;
@@ -37,6 +38,7 @@ public:
 	void	beRepaired(unsigned int amount);
 
 	std::string	getName() const;
+	std::string	getType() const;
 	int			getHitPoints() const;
 	int			getEnergyPoints() const;
 	int			getAttackDamage() const;

@@ -1,19 +1,26 @@
 #include "ClapTrap.hpp"
 #include <iostream>
 
-const int HIT_POINTS	= 10;
-const int ENERGY_POINTS	= 10;
-const int ATTACK_DAMAGE	= 0;
+const int C_HIT_POINTS		= 10;
+const int C_ENERGY_POINTS	= 10;
+const int C_ATTACK_DAMAGE	= 0;
 const std::string DFLT_MSG = "I can do nothing!!!\n";
 
-ClapTrap::ClapTrap(void) : name(__func__), hitPoints(HIT_POINTS), energyPoints(ENERGY_POINTS), attackDamage(ATTACK_DAMAGE)
+ClapTrap::ClapTrap(void) : name(__func__), type(__func__), hitPoints(C_HIT_POINTS), energyPoints(C_ENERGY_POINTS), attackDamage(C_ATTACK_DAMAGE)
 {
 	std::cout << GREEN "Default constructor called\n" << *this << RESET;
 }
 
-ClapTrap::ClapTrap(ClapTrap &copy)
+ClapTrap::ClapTrap(ClapTrap &copy) : type(__func__)
 {
-	*this = copy;
+	if (this != &copy)
+	{
+		this->name = copy.name;
+		this->type = copy.type;
+		this->hitPoints = copy.hitPoints;
+		this->energyPoints = copy.energyPoints;
+		this->attackDamage = copy.attackDamage;
+	}
 	std::cout << YELLOW "Copy constructor called\n" << *this << RESET;
 }
 
@@ -22,6 +29,7 @@ ClapTrap	&ClapTrap::operator=(const ClapTrap& copy)
 	if (this != &copy)
 	{
 		this->name = copy.name;
+		this->type = copy.type;
 		this->hitPoints = copy.hitPoints;
 		this->energyPoints = copy.energyPoints;
 		this->attackDamage = copy.attackDamage;
@@ -35,7 +43,7 @@ ClapTrap::~ClapTrap(void)
 	std::cout << RED "Desstructor called\n" << *this << RESET;
 }
 
-ClapTrap::ClapTrap(const std::string name) : name(name), hitPoints(HIT_POINTS), energyPoints(ENERGY_POINTS), attackDamage(ATTACK_DAMAGE)
+ClapTrap::ClapTrap(const std::string name) : name(name), type(__func__), hitPoints(C_HIT_POINTS), energyPoints(C_ENERGY_POINTS), attackDamage(C_ATTACK_DAMAGE)
 {
 	std::cout << GREEN "Parametric constructor called\n" << *this << RESET;
 }
@@ -49,7 +57,8 @@ void	ClapTrap::attack(const std::string& target)
 	}
 	--energyPoints;
 	std::cout	<< YELLOW << *this 
-				<< "ClapTrap '" << name
+				<< type
+				<< " '" << name
 				<< "' attacks '" << target 
 				<< "', causing " << attackDamage 
 				<< " points of damage!\n" RESET;
@@ -89,6 +98,11 @@ std::string ClapTrap::getName() const
 	return name;
 }
 
+std::string ClapTrap::getType() const
+{
+	return type;
+}
+
 int	ClapTrap::getHitPoints() const
 {
 	return hitPoints;
@@ -106,6 +120,6 @@ int	ClapTrap::getAttackDamage() const
 
 std::ostream & operator<<(std::ostream & o, ClapTrap const & i)
 {
-	o << "ClapTrap '" << i.getName() << "' [HP: " << i.getHitPoints() << ", EP: " << i.getEnergyPoints() << ", AD: " << i.getAttackDamage() << "]\n";
+	o << i.getType() << " '" << i.getName() << "' [HP: " << i.getHitPoints() << ", EP: " << i.getEnergyPoints() << ", AD: " << i.getAttackDamage() << "]\n";
 	return o;
 }
