@@ -60,6 +60,6 @@ void	FragTrap::highFivesGuys()
 
 std::ostream & operator<<(std::ostream & o, FragTrap const & i)
 {
-	o << "FragTrap '" << i.getName() << "' [HP: " << i.getHitPoints() << ", EP: " << i.getEnergyPoints() << ", AD: " << i.getAttackDamage() << "]\n";
+	o << "[type: " << i.getType() << " '" << i.getName() << "' HP: " << i.getHitPoints() << ", EP: " << i.getEnergyPoints() << ", AD: " << i.getAttackDamage() << "]\n";
 	return o;
 }
