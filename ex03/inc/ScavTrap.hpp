@@ -16,10 +16,15 @@
 class ScavTrap : virtual public ClapTrap
 {
 public:
+	ScavTrap(std::string name,
+			 std::string type,
+			 int hitPoints,
+			 int energyPoints,
+			 int attackDamage);
 	// ? Orthodox Canonical Form
 	ScavTrap(void);
 	ScavTrap(ScavTrap &copy);
-	ClapTrap &operator=(const ScavTrap &copy);
+	ScavTrap &operator=(const ScavTrap &copy);
 	~ScavTrap(void);
 	// ? Orthodox Canonical Form
 

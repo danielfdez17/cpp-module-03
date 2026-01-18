@@ -16,10 +16,15 @@
 class FragTrap : virtual public ClapTrap
 {
 public:
+	FragTrap(std::string name,
+	std::string type,
+	int hitPoints,
+	int energyPoints,
+	int attackDamage);
 	// ? Orthodox Canonical Form
 	FragTrap(void);
 	FragTrap(FragTrap &copy);
-	ClapTrap & operator=(const FragTrap& copy);
+	FragTrap & operator=(const FragTrap& copy);
 	~FragTrap(void);
 	// ? Orthodox Canonical Form
 

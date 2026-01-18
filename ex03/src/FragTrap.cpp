@@ -5,6 +5,12 @@ const int F_HIT_POINTS	= 100;
 const int F_ENERGY_POINTS	= 100;
 const int F_ATTACK_DAMAGE	= 30;
 
+FragTrap::FragTrap(std::string name, std::string type, int hitPoints, int energyPoints, int attackDamage) : ClapTrap(name, type, hitPoints, energyPoints, attackDamage)
+{
+	this->type = __func__;
+	std::cout << GREEN << *this << __func__ << " Default constructor called\n" RESET;
+}
+
 FragTrap::FragTrap(void) : ClapTrap(__func__, __func__, F_HIT_POINTS, F_ENERGY_POINTS, F_ATTACK_DAMAGE)
 {
 	this->type = __func__;
@@ -24,7 +30,7 @@ FragTrap::FragTrap(FragTrap &copy) : ClapTrap(copy)
 	std::cout << YELLOW << *this << __func__ << " Copy constructor called\n" RESET;
 }
 
-ClapTrap	&FragTrap::operator=(const FragTrap& copy)
+FragTrap	&FragTrap::operator=(const FragTrap& copy)
 {
 	this->type = __func__;
 	if (this != &copy)

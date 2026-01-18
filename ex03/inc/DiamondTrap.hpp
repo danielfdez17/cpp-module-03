@@ -14,7 +14,7 @@
 #include "FragTrap.hpp"
 #include "ScavTrap.hpp"
 
-class DiamondTrap : virtual public FragTrap, virtual public ScavTrap
+class DiamondTrap : public FragTrap, public ScavTrap
 {
 private:
 	std::string name;
@@ -33,6 +33,7 @@ public:
 	// void	beRepaired(unsigned int amount);
 
 	void	whoAmI();
+	std::string	getType() const;
 };
 
 std::ostream & operator<<(std::ostream & o, DiamondTrap const & i);

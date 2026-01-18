@@ -5,6 +5,12 @@ const int S_HIT_POINTS		= 100;
 const int S_ENERGY_POINTS	= 50;
 const int S_ATTACK_DAMAGE	= 20;
 
+ScavTrap::ScavTrap(std::string name, std::string type, int hitPoints, int energyPoints, int attackDamage) : ClapTrap(name, type, hitPoints, energyPoints, attackDamage)
+{
+	this->type = __func__;
+	std::cout << GREEN << *this << __func__ << " Default constructor called\n" RESET;
+}
+
 ScavTrap::ScavTrap(void) : ClapTrap(__func__, __func__, S_HIT_POINTS, S_ENERGY_POINTS, S_ATTACK_DAMAGE)
 {
 	this->type = __func__;
@@ -24,7 +30,7 @@ ScavTrap::ScavTrap(ScavTrap &copy) : ClapTrap(copy)
 	std::cout << YELLOW << *this << __func__ << " Copy constructor called\n" RESET;
 }
 
-ClapTrap &ScavTrap::operator=(const ScavTrap &copy)
+ScavTrap &ScavTrap::operator=(const ScavTrap &copy)
 {
 	this->type = __func__;
 	if (this != &copy)

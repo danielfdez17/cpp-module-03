@@ -4,8 +4,9 @@
 const int D_HIT_POINTS	= 100; // ? From FragTrap
 const int D_ENERGY_POINTS	= 50; // ? From ScavTrap
 const int D_ATTACK_DAMAGE	= 30; // ? From FragTrap
+// ? DiamondTrap::attack() === ScavTrap::attack()
 
-DiamondTrap::DiamondTrap(void) : FragTrap(__func__), ScavTrap(__func__)
+DiamondTrap::DiamondTrap(void) : FragTrap(__func__, __func__, D_HIT_POINTS, D_ENERGY_POINTS, D_ATTACK_DAMAGE), ScavTrap(__func__, __func__, D_HIT_POINTS, D_ENERGY_POINTS, D_ATTACK_DAMAGE)
 {
 	this->name = __func__;
 	this->type = __func__;
@@ -22,9 +23,9 @@ DiamondTrap::DiamondTrap(DiamondTrap &copy) : ClapTrap(copy), FragTrap(copy), Sc
 	if (this != &copy)
 	{
 		this->name = copy.name;
-		this->hitPoints = FragTrap::hitPoints;
-		this->energyPoints = ScavTrap::energyPoints;
-		this->attackDamage = FragTrap::attackDamage;
+		this->hitPoints = copy.hitPoints;
+		this->energyPoints = copy.energyPoints;
+		this->attackDamage = copy.attackDamage;
 	}
 	std::cout << YELLOW << *this << __func__ << " Copy constructor called\n" RESET;
 }
@@ -35,9 +36,9 @@ DiamondTrap	&DiamondTrap::operator=(const DiamondTrap& copy)
 	if (this != &copy)
 	{
 		this->name = copy.name;
-		this->hitPoints = FragTrap::hitPoints;
-		this->energyPoints = ScavTrap::energyPoints;
-		this->attackDamage = FragTrap::attackDamage;
+		this->hitPoints = copy.hitPoints;
+		this->energyPoints = copy.energyPoints;
+		this->attackDamage = copy.attackDamage;
 		ClapTrap::name = copy.ClapTrap::name;
 	}
 	std::cout << CYAN << *this << __func__ << " Copy assignment operator called\n" RESET;
@@ -49,7 +50,7 @@ DiamondTrap::~DiamondTrap(void)
 	std::cout << RED << *this << __func__ << " Destructor called\n" RESET;
 }
 
-DiamondTrap::DiamondTrap(const std::string name) : ClapTrap(name + "_clap_name"), FragTrap(name), ScavTrap(name)
+DiamondTrap::DiamondTrap(const std::string name) : ClapTrap(name + "_clap_name", __func__, D_HIT_POINTS, D_ENERGY_POINTS, D_ATTACK_DAMAGE), FragTrap(name, __func__, D_HIT_POINTS, D_ENERGY_POINTS, D_ATTACK_DAMAGE), ScavTrap(name, __func__, D_HIT_POINTS, D_ENERGY_POINTS, D_ATTACK_DAMAGE)
 {
 	this->name = name;
 	this->hitPoints = FragTrap::hitPoints;
@@ -104,8 +105,13 @@ DiamondTrap::DiamondTrap(const std::string name) : ClapTrap(name + "_clap_name")
 
 void	DiamondTrap::whoAmI()
 {
-	std::cout << BLUE "I am DiamondTrap '" << name << "'\n" RESET;
-	std::cout << BLUE "My ClapTrap name is '" << ClapTrap::name << "'\n" RESET;
+	std::cout << BLUE "I am DiamondTrap '" << this->name << "'\n" RESET;
+	std::cout << BLUE "My ClapTrap name is '" << this->ClapTrap::name << "'\n" RESET;
+}
+
+std::string	DiamondTrap::getType() const
+{
+	return this->type;
 }
 
 std::ostream & operator<<(std::ostream & o, DiamondTrap const & i)
