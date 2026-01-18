@@ -3,7 +3,7 @@
 
 int main(void)
 {
-	DiamondTrap patata("patata");
+	DiamondTrap patata("diamond");
 	std::cout << "hit points: " << patata.getHitPoints() << " (should be 100)\n";
 	std::cout << "energy points: " << patata.getEnergyPoints() << " (should be 50)\n";
 	std::cout << "attack damage: " << patata.getAttackDamage() << " (should be 30)\n";
