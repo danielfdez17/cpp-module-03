@@ -1,2 +1,0 @@
- - hotfix: inherited methods in ex01 and ex02
- - fix:	DiamondTrap inherited attributes and methods
